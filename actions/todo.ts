@@ -28,3 +28,24 @@ export async function deleteTodo({id}: {id: string}){
     return false;
 }
 }
+
+export async function updateTodo({id, title, description, isCompleted}: {id: string, description: string, title: string, isCompleted: boolean}){
+try{
+    await prisma.todo.update({
+        where: {
+            id,
+        },
+        data: {
+            title,
+            description,
+            isCompleted,
+        },
+    });
+    revalidatePath("/")
+    return true;
+}
+catch(err){
+    console.error(err);
+    return false;
+}
+}
