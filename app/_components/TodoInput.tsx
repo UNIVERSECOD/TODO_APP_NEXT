@@ -1,6 +1,6 @@
 "use client"
 import { createTodo } from "@/actions/todo";
-import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 import React, { useRef } from "react";
 
 const TodoInput = () => {
@@ -10,13 +10,16 @@ const ref = useRef<HTMLInputElement>(null);
     const title = ref.current?.value.trim()
     if(!title) return;
 
-    createTodo({title})
+ createTodo({title})
+    ref.current.value = "";
+
   }
 
   return (
     <div>
       <div className="flex mt-4">
         <input
+        ref = {ref}
           className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
           placeholder="Add Todo"
         />

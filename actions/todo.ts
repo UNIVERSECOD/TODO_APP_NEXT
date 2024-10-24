@@ -10,6 +10,7 @@ export async function createTodo({title}: {title: string}){
             title,
         },
 });
+revalidatePath("/")
 console.log(result);
 return result;
 }
