@@ -90,8 +90,8 @@ const EditModal = ({ todo }: Props) => {
               Status
             </Label>
             <Checkbox
-              ref={isCompletedRef}
-              defaultChecked={isCompleted}
+              checked={isCompleted} 
+              onCheckedChange={(checked) => setIsCompleted(!!checked)}
               id="status"
             />
           </div>
